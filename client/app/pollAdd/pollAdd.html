@@ -1,0 +1,28 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="col-md-12">
+    <form>
+      <div class="form-group">
+        <label>Question:</label>
+        <input name="question" type="text" placeholder="Enter your Question" ng-model="newPoll.question"></input>
+        <div class="form-group" ng-repeat="option in newPoll.options">
+            <div class="form-group">
+              <label>Option {{ option.id + 1 }}</label>
+              <input name="text" type="text" placeholder="Poll Option" ng-model="option.text">
+              <button ng-hide="$first" class="btn btn-danger btn-xs" ng-click="deleteOption(option.id)"><i class="fa fa-minus fa-xs"></i></button>
+            </div>
+        </div>
+        <button class="btn btn-success btn-xs" title="Add Poll Option" ng-click="addOption()"><i class="fa fa-plus fa-xs"></i></button>
+      </div>
+      <button class="btn btn-primary" ng-click="addPoll()">Save</button>
+
+    </form>
+    <h2>Polls:</h2>
+    <div ng-repeat="poll in polls">
+      <h3>{{ poll.question }}<button class="btn btn-danger btn-xs" confirm="Are you sure you want to delete this poll?"
+            ng-click="deletePoll(poll)"><i class="fa fa-minus fa-xs"></i></button></h3>
+      <ul ng-repeat="option in poll.options">
+        <li>{{ option.text }} </li>
+      </ul>
+    </div>
+</div>

@@ -6,7 +6,8 @@ angular.module('meanApp', [
   'ngSanitize',
   'ngRoute',
   'btford.socket-io',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'angular-confirm'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider

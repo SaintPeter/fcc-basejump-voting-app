@@ -8,5 +8,5 @@ module.exports = {
     uri: 'mongodb://localhost/mean-dev'
   },
 
-  seedDB: true
+  seedDB: false
 };
