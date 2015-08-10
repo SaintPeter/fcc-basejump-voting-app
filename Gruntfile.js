@@ -98,6 +98,7 @@ module.exports = function (grunt) {
 
           '!{.tmp,<%= yeoman.client %>}{app,components}/**/*.spec.js',
           '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js',
+          '!{.tmp,<%= yeoman.server %>}/{views}/**/*.ejs',
           '<%= yeoman.client %>/assets/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}'
         ],
         options: {
@@ -106,7 +107,7 @@ module.exports = function (grunt) {
       },
       express: {
         files: [
-          'server/**/*.{js,json}'
+          'server/**/*.{js,json,ejs}'
         ],
         tasks: ['express:dev', 'wait'],
         options: {

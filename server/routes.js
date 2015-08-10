@@ -15,7 +15,7 @@ module.exports = function(app) {
   app.use('/api/users', require('./api/user'));
 
   app.use('/auth', require('./auth'));
-  
+
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
    .get(errors[404]);
@@ -23,6 +23,8 @@ module.exports = function(app) {
   // All other routes should redirect to the index.html
   app.route('/*')
     .get(function(req, res) {
-      res.sendFile(path.resolve(app.get('appPath') + '/index.html'));
+      //res.sendFile(path.resolve(app.get('appPath') + '/index.html'));
+      console.log("Rendering pages/index");
+      res.render('pages/index', { clientIP: req.ip } );
     });
 };
