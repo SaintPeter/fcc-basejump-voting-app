@@ -13,7 +13,8 @@ angular.module('meanApp')
       if($scope.newPoll.question === "" || $scope.newPoll.options.length === 1) {
         return;
       }
-      $scope.newPoll.owner = Auth.getCurrentUser().name;
+      $scope.newPoll.owner = Auth.getCurrentUser()._id;
+      $scope.newPoll.owner_name = Auth.getCurrentUser().name;
       $scope.newPoll.created = new Date();
 
       // Remove any blank answers:
@@ -49,6 +50,15 @@ angular.module('meanApp')
 
     $scope.deletePoll = function(poll) {
       $http.delete('/api/polls/' + poll._id);
+    };
+
+    $scope.voted = function(poll) {
+      // If the client IP is not in the list of voters they have not voted
+      return poll.voters.indexOf(clientIP) != -1;
+    };
+
+    $scope.doVote = function(poll, option) {
+      $http.put('/api/polls/vote/' + poll._id, { voteFor: option.id });
     };
 
     $scope.$on('$destroy', function () {

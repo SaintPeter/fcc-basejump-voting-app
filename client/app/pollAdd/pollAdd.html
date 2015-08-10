@@ -19,10 +19,20 @@
     </form>
     <h2>Polls:</h2>
     <div ng-repeat="poll in polls">
-      <h3>{{ poll.question }}<button class="btn btn-danger btn-xs" confirm="Are you sure you want to delete this poll?"
-            ng-click="deletePoll(poll)"><i class="fa fa-minus fa-xs"></i></button></h3>
-      <ul ng-repeat="option in poll.options">
-        <li>{{ option.text }} </li>
-      </ul>
+      <div ng-if="voted(poll)">
+        <h3>{{ poll.question }} [ {{ poll.totalVotes }} ]<button class="btn btn-danger btn-xs" confirm="Are you sure you want to delete this poll?"
+              ng-click="deletePoll(poll)"></h3>
+        <ul ng-repeat="option in poll.options">
+          <li>{{ option.text }}: {{ poll.votes[option.id] }} </li>
+        </ul>
+        <p>Show Chart Here</p>
+      </div>
+      <div ng-if="!voted(poll)">
+        <h3>{{ poll.question }}<button class="btn btn-danger btn-xs" confirm="Are you sure you want to delete this poll?"
+              ng-click="deletePoll(poll)"><i class="fa fa-minus fa-xs"></i></button></h3>
+        <ul ng-repeat="option in poll.options">
+          <li>{{ option.text }} <button class="btn btn-info btn-xs" ng-click="doVote(poll, option)">Vote</button></li>
+        </ul>
+      </div>
     </div>
 </div>

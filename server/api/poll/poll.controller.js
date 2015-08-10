@@ -42,6 +42,26 @@ exports.update = function(req, res) {
   });
 };
 
+// adds a voter to the object
+exports.vote = function(req, res) {
+  if(req.body._id) { delete req.body._id; }
+  Poll.findById(req.params.id, function (err, poll) {
+    if (err) { return handleError(res, err); }
+    if(!poll) { return res.status(404).send('Not Found'); }
+    console.log("Before Update:", JSON.stringify(poll, null, 2));
+    var updated = _.extend(poll, req.body);
+
+    updated.voters.push(req.ip);
+
+    console.log("After Update:", JSON.stringify(updated, null, 2));
+
+    updated.save(function (err) {
+      if (err) { return handleError(res, err); }
+      return res.status(200).json(poll);
+    });
+  });
+};
+
 // Deletes a poll from the DB.
 exports.destroy = function(req, res) {
   Poll.findById(req.params.id, function (err, poll) {
