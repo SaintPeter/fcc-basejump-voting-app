@@ -30,7 +30,8 @@ module.exports = function (grunt) {
     yeoman: {
       // configurable paths
       client: require('./bower.json').appPath || 'client',
-      dist: 'dist'
+      dist: 'dist',
+      server: 'server'
     },
     express: {
       options: {
@@ -220,7 +221,7 @@ module.exports = function (grunt) {
     // Automatically inject Bower components into the app
     wiredep: {
       target: {
-        src: '<%= yeoman.client %>/index.html',
+        src: '<%= yeoman.server %>/views/pages/index.ejs',
         ignorePath: '<%= yeoman.client %>/',
         exclude: [/bootstrap-sass-official/, /bootstrap.js/, '/json3/', '/es5-shim/']
       }
@@ -244,7 +245,7 @@ module.exports = function (grunt) {
     // concat, minify and revision files. Creates configurations in memory so
     // additional tasks can operate on them
     useminPrepare: {
-      html: ['<%= yeoman.client %>/index.html'],
+      html: ['<%= yeoman.server %>/views/pages/index.ejs'],
       options: {
         dest: '<%= yeoman.dist %>/public'
       }
@@ -496,7 +497,7 @@ module.exports = function (grunt) {
           endtag: '<!-- endinjector -->'
         },
         files: {
-          '<%= yeoman.client %>/index.html': [
+          '<%= yeoman.server %>/views/pages/index.ejs': [
                [
 
                  '.tmp/{app,components}/**/*.js',
@@ -521,7 +522,7 @@ module.exports = function (grunt) {
           endtag: '<!-- endinjector -->'
         },
         files: {
-          '<%= yeoman.client %>/index.html': [
+          '<%= yeoman.server %>/views/pages/index.ejs': [
             '<%= yeoman.client %>/{app,components}/**/*.css'
           ]
         }
