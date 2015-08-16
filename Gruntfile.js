@@ -159,6 +159,7 @@ module.exports = function (grunt) {
           dot: true,
           src: [
             '.tmp',
+            '<%= yeoman.dist %>/server/views*',
             '<%= yeoman.dist %>/*',
             '!<%= yeoman.dist %>/.git*',
             '!<%= yeoman.dist %>/.openshift',
@@ -222,7 +223,7 @@ module.exports = function (grunt) {
     wiredep: {
       target: {
         src: '<%= yeoman.server %>/views/pages/index.ejs',
-        ignorePath: '<%= yeoman.client %>/',
+        ignorePath: '../../../client',
         exclude: [/bootstrap-sass-official/, /bootstrap.js/, '/json3/', '/es5-shim/']
       }
     },
@@ -253,7 +254,7 @@ module.exports = function (grunt) {
 
     // Performs rewrites based on rev and the useminPrepare configuration
     usemin: {
-      html: ['<%= yeoman.dist %>/public/{,*/}*.html'],
+      html: ['<%= yeoman.dist %>/server/views/{,*/}*.html', '<%= yeoman.dist %>/server/views/{,*/}*.ejs'],
       css: ['<%= yeoman.dist %>/public/{,*/}*.css'],
       js: ['<%= yeoman.dist %>/public/{,*/}*.js'],
       options: {
