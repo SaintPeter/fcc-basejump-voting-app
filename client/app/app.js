@@ -7,7 +7,8 @@ angular.module('meanApp', [
   'ngRoute',
   'btford.socket-io',
   'ui.bootstrap',
-  'angular-confirm'
+  'angular-confirm',
+  "highcharts-ng"
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider

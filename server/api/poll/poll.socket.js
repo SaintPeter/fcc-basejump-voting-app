@@ -8,6 +8,8 @@ var Poll = require('./poll.model');
 
 exports.register = function(socket) {
   Poll.schema.post('save', function (doc) {
+    console.log(doc.chart.series[0].data);
+    doc = doc.updateChart(null, doc);
     onSave(socket, doc);
   });
   Poll.schema.post('remove', function (doc) {

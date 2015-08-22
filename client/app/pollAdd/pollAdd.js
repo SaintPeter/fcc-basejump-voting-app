@@ -7,5 +7,10 @@ angular.module('meanApp')
         templateUrl: 'app/pollAdd/pollAdd.html',
         controller: 'PollAddCtrl',
         authenticate: true
+      })
+      .when('/pollAdd/:forceVote', {
+        templateUrl: 'app/pollAdd/pollAdd.html',
+        controller: 'PollAddCtrl',
+        authenticate: true
       });
   });

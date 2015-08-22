@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('meanApp')
-  .controller('PollAddCtrl', function ($scope, $http, socket, Auth) {
+  .controller('PollAddCtrl', function ($scope, $http, socket, Auth, $timeout, $routeParams) {
     $scope.newPoll = { votes: [], options: [ { id: 0, text: ""} ]};
 
     $http.get('/api/polls').success(function(polls) {
-      $scope.polls = polls;
+      $scope.polls = polls; // .map(chartData);
       socket.syncUpdates('poll', $scope.polls);
     });
 
@@ -53,6 +53,9 @@ angular.module('meanApp')
     };
 
     $scope.voted = function(poll) {
+      if($routeParams.forceVote) {
+        return false;
+      }
       // If the client IP is not in the list of voters they have not voted
       return poll.voters.indexOf(clientIP) != -1;
     };

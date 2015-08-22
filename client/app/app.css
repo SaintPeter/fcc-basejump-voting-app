@@ -37,3 +37,17 @@
     color: #000;
     padding: 0.2em 0;
 }
+
+/**
+ * Poll Styles
+ */
+
+.panel .heading-custom-poll {
+  background-image: none;
+  background-color: lightgrey;
+}
+
+.author {
+  font-size: 75%;
+  margin-left: 10px;
+}
