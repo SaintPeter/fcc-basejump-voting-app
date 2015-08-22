@@ -51,3 +51,60 @@
   font-size: 75%;
   margin-left: 10px;
 }
+
+.slide-leave, .slide-enter {
+    -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+    -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+    -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+}
+.slide-leave {
+    position: relative;
+    top: 0;
+}
+.slide-leave.slide-leave-active {
+    position: absolute;
+    top: -100px;
+}
+.slide-enter {
+    position: absolute;
+    top: 100px;
+}
+.slide-enter.slide-enter-active {
+    position: relative;
+    top: 0px;
+}
+
+/*
+Pour dire en CSS3 ce qui devra être animé :
+Angular ajoute dynamiquement des classes CSS.
+La transition se fait soit entre ng-enter et ng-enter-active
+ou entre ng-leave et ng-leave-active.
+*/
+ .animate-if.ng-enter, .animate-if.ng-leave {
+    -webkit-transition: 1s linear all;
+    -moz-transition: 1s linear all;
+    -ms-transition: 1s linear all;
+    -o-transition: 1s linear all;
+    transition: 1s linear all;
+}
+/* du début de l'entrée */
+ .animate-if.ng-enter {
+    max-height: 0;
+    opacity: 0;
+}
+/* à la fin de l'entrée */
+ .animate-if.ng-enter.ng-enter-active {
+    max-height: 999px;
+    opacity:1;
+}
+/* du début de la sortie */
+ .animate-if.ng-leave {
+    max-height: 999px;
+    opacity:1;
+}
+/* à la fin de la sortie */
+ .animate-if.ng-leave.ng-leave-active {
+    max-height: 0;
+    opacity:1;
+}

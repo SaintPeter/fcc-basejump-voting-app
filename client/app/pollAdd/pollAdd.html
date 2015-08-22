@@ -19,7 +19,7 @@
     </form>
     <h2>Polls:</h2>
     <div class="col-md-4" ng-repeat="poll in polls">
-        <div  class="panel panel-default" ng-if="voted(poll)">
+        <div  class="panel panel-default" ng-if="voted(poll)" ng-animate="'slide'">
           <div class="panel-heading heading-custom-poll">
             <h3 class="panel-title">{{ poll.question }} [ {{ poll.totalVotes }} ]
                 <button class="btn btn-danger btn-xs pull-right" confirm="Are you sure you want to delete this poll?" ng-click="deletePoll(poll)">
@@ -32,10 +32,10 @@
             <ul ng-repeat="option in poll.options">
               <li>{{ option.text }}: {{ poll.votes[option.id] }} </li>
             </ul>
-            <highchart id="chart{{$index}}" config="poll.chart"></highchart>
+            <canvas id="doughnut" class="chart chart-doughnut" data="poll.chartData" labels="poll.chartLabels"></canvas>
           </div>
         </div>
-        <div class="panel panel-default" ng-if="!voted(poll)">
+        <div class="panel panel-default" ng-if="!voted(poll)"  ng-animate="'if'">
           <div class="panel-heading heading-custom-poll">
             <h3 class="panel-title">{{ poll.question }}
               <button class="btn btn-danger btn-xs" confirm="Are you sure you want to delete this poll?" ng-click="deletePoll(poll)">

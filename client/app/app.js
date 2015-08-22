@@ -8,7 +8,8 @@ angular.module('meanApp', [
   'btford.socket-io',
   'ui.bootstrap',
   'angular-confirm',
-  "highcharts-ng"
+  "chart.js",
+  'ngAnimate'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider

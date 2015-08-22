@@ -30,59 +30,39 @@ PollSchema.virtual('voteFor').set(function(voteFor, voterIp) {
   this.markModified('totalVotes');
 });
 
-PollSchema.virtual('chart').get(function() {
-  var poll = this;
-  var cd = {
-      options: {
-        chart: {
-          renderTo: 'container',
-          type: 'pie'
-        },
-        tooltip: {
-          pointFormat: "{point.y:.2f}%"
-        }
-      },
-      title: {
-        text: poll.question
-      },
-      yAxis: {
-        min: 0,
-        max: 100
-      },
-      series: [{
-        data: []
-      }],
-      // xAxis: {
-      //   categories: []
-      // },
-      func: function(chart) {
-        $timeout(function() {
-          chart.reflow();
-        }, 0);
-      }
-  };
+PollSchema.virtual('chartLabels').get(function() {
+  var poll = this,
+      labels = [];
 
   // Sort the poll options for display
   poll.options = poll.options.sort(function(a,b) {
     return poll.votes[b.id] - poll.votes[a.id];
   });
 
-  var yMax = 0;
   poll.options.forEach(function(option){
-    var y = poll.votes[option.id] / poll.totalVotes * 100;
-    //cd.xAxis.categories.push(option.text);
-    cd.series[0].data.push({
-      y: y,
-      name: option.text
-    });
-    yMax = Math.max(yMax, y);
+    labels.push(option.text);
   });
 
-  // Max Y is rounded up to the nearest 10, plus 5, max of 100
-  cd.yAxis.max = Math.min(100, Math.ceil(yMax/10) * 10 + 5);
-
-  return cd;
+  return labels;
 });
+
+PollSchema.virtual('chartData').get(function() {
+  var poll = this,
+      data = [];
+
+  // Sort the poll options for display
+  poll.options = poll.options.sort(function(a,b) {
+    return poll.votes[b.id] - poll.votes[a.id];
+  });
+
+  poll.options.forEach(function(option){
+    var y = poll.votes[option.id] / poll.totalVotes * 100;
+    data.push(poll.votes[option.id]);
+  });
+
+  return data;
+});
+
 
 // Include charts in output
 PollSchema.set('toJSON', {
