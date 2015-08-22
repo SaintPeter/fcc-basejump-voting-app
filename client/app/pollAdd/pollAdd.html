@@ -32,7 +32,7 @@
             <ul ng-repeat="option in poll.options">
               <li>{{ option.text }}: {{ poll.votes[option.id] }} </li>
             </ul>
-            <highchart id="chart{{$index}}" title="{ text: poll.question }" config="poll.chart"></highchart>
+            <highchart id="chart{{$index}}" config="poll.chart"></highchart>
           </div>
         </div>
         <div class="panel panel-default" ng-if="!voted(poll)">

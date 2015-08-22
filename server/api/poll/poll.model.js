@@ -30,34 +30,36 @@ PollSchema.virtual('voteFor').set(function(voteFor, voterIp) {
   this.markModified('totalVotes');
 });
 
-PollSchema.methods.updateChart = function(next, poll) {
+PollSchema.virtual('chart').get(function() {
+  var poll = this;
   var cd = {
-        options: {
-          chart: {
-            renderTo: 'container',
-            type: 'bar'
-          },
-          tooltip: {
-             pointFormat: "{point.y}%"
-          }
+      options: {
+        chart: {
+          renderTo: 'container',
+          type: 'pie'
         },
-        title: {text: poll.question},
-
-        yAxis: {
-          min: 0,
-          max: 100
-        },
-        series: [{
-            data: []
-        }],
-        xAxis: {
-          categories: []
-        },
-        func: function(chart) {
-            $timeout(function() {
-                chart.reflow();
-            }, 0);
+        tooltip: {
+          pointFormat: "{point.y:.2f}%"
         }
+      },
+      title: {
+        text: poll.question
+      },
+      yAxis: {
+        min: 0,
+        max: 100
+      },
+      series: [{
+        data: []
+      }],
+      // xAxis: {
+      //   categories: []
+      // },
+      func: function(chart) {
+        $timeout(function() {
+          chart.reflow();
+        }, 0);
+      }
   };
 
   // Sort the poll options for display
@@ -68,22 +70,24 @@ PollSchema.methods.updateChart = function(next, poll) {
   var yMax = 0;
   poll.options.forEach(function(option){
     var y = poll.votes[option.id] / poll.totalVotes * 100;
-    cd.xAxis.categories.push(option.text);
-    cd.series[0].data.push(y);
+    //cd.xAxis.categories.push(option.text);
+    cd.series[0].data.push({
+      y: y,
+      name: option.text
+    });
     yMax = Math.max(yMax, y);
   });
 
   // Max Y is rounded up to the nearest 10, plus 5, max of 100
   cd.yAxis.max = Math.min(100, Math.ceil(yMax/10) * 10 + 5);
 
-  poll.chart = cd;
-  if(next) {
-    next();
-  } else {
-    return poll;
-  }
-};
+  return cd;
+});
 
-PollSchema.pre('init', PollSchema.methods.updateChart);
+// Include charts in output
+PollSchema.set('toJSON', {
+  virtuals: true
+});
+//PollSchema.pre('init', PollSchema.methods.updateChart);
 
 module.exports = mongoose.model('Poll', PollSchema);
