@@ -19,32 +19,33 @@
     </form>
     <h2>Polls:</h2>
     <div class="col-md-4" ng-repeat="poll in polls">
-        <div  class="panel panel-default" ng-if="voted(poll)" ng-animate="'slide'">
-          <div class="panel-heading heading-custom-poll">
-            <h3 class="panel-title">{{ poll.question }} [ {{ poll.totalVotes }} ]
-                <button class="btn btn-danger btn-xs pull-right" confirm="Are you sure you want to delete this poll?" ng-click="deletePoll(poll)">
+        <div  class="panel panel-default" ng-if="voted(poll)" ng-animate="'if'">
+          <div class="panel-heading heading-custom-poll" ng-click="toggleExpand(poll)">
+            <h3 class="panel-title">
+                <span class="totalVotes pull-left" ng-class="{voted: voted(poll)}"> {{ poll.totalVotes }} </span>
+                {{ poll.question }}
+                <button ng-show="pollOwner(poll)" class="btn btn-danger btn-xs pull-right" confirm="Are you sure you want to delete this poll?" ng-click="deletePoll(poll)">
                   <i class="fa fa-minus fa-xs"></i>
                 </button>
                 <br /><a class="author" href="#"> {{ poll.owner_name }} </a>
             </h3>
           </div>
-          <div class="panel-body">
-            <ul ng-repeat="option in poll.options">
-              <li>{{ option.text }}: {{ poll.votes[option.id] }} </li>
-            </ul>
-            <canvas id="doughnut" class="chart chart-doughnut" data="poll.chartData" labels="poll.chartLabels"></canvas>
+          <div class="panel-body poll-body slide" ng-show="expanded(poll)">
+            <canvas id="doughnut" class="chart chart-doughnut" data="poll.chartData" labels="poll.chartLabels" legend="true"></canvas>
           </div>
         </div>
-        <div class="panel panel-default" ng-if="!voted(poll)"  ng-animate="'if'">
-          <div class="panel-heading heading-custom-poll">
-            <h3 class="panel-title">{{ poll.question }}
-              <button class="btn btn-danger btn-xs" confirm="Are you sure you want to delete this poll?" ng-click="deletePoll(poll)">
+        <div class="panel panel-default" ng-if="!voted(poll)">
+          <div class="panel-heading heading-custom-poll" ng-click="toggleExpand(poll)">
+            <h3 class="panel-title">
+              <span class="totalVotes pull-left" ng-class="{voted: voted(poll)}"> {{ (poll.totalVotes) ? poll.totalVotes : 0  }} </span>
+              {{ poll.question }}
+              <button ng-show="pollOwner(poll)" class="btn btn-danger btn-xs pull-right" confirm="Are you sure you want to delete this poll?" ng-click="deletePoll(poll)">
                 <i class="fa fa-minus fa-xs"></i>
               </button>
               <br /><a class="author" href="#"> {{ poll.owner_name }} </a>
             </h3>
           </div>
-          <div class="panel-body">
+          <div class="panel-body poll-body slide" ng-show="expanded(poll)">
             <ul ng-repeat="option in poll.options">
               <li>{{ option.text }} <button class="btn btn-info btn-xs" ng-click="doVote(poll, option)">Vote</button></li>
             </ul>
