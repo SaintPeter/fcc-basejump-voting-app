@@ -1,8 +1,26 @@
 'use strict';
 
 angular.module('meanApp')
-  .controller('MainCtrl', function ($scope, $http, socket, Auth,$timeout, $routeParams) {
+  .controller('MainCtrl', function ($scope, $http, socket, Auth,$timeout, $routeParams, ModalService) {
     $scope.isLoggedIn = Auth.isLoggedIn;
+
+    $scope.showAddPollModal = function() {
+      ModalService.showModal({
+        templateUrl: "/app/newPoll/newPoll.html",
+        controller: "NewPollCtrl"
+      }).then(function(modal) {
+        //it's a bootstrap element, use 'modal' to show it
+        console.log(modal);
+        modal.element.modal();
+        modal.close.then(function(result) {
+          console.log(result);
+        });
+
+      }).catch(function(error) {
+          // error contains a detailed error message.
+          console.log("Error:", error);
+      });
+    };
 
     var expanded = {};
     $scope.newPoll = { votes: [], options: [ { id: 0, text: ""} ]};

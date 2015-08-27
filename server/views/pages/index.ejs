@@ -13,9 +13,9 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
+      <link rel="stylesheet" href="/bower_components/angular-chart.js/dist/angular-chart.css" />
       <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
       <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" />
-      <link rel="stylesheet" href="/bower_components/angular-chart.js/dist/angular-chart.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -24,7 +24,9 @@
       <link rel="stylesheet" href="app/account/login/login.css">
       <link rel="stylesheet" href="app/admin/admin.css">
       <link rel="stylesheet" href="app/app.css">
+      <link rel="stylesheet" href="app/editPoll/editPoll.css">
       <link rel="stylesheet" href="app/main/main.css">
+      <link rel="stylesheet" href="app/newPoll/newPoll.css">
       <link rel="stylesheet" href="app/pollAdd/pollAdd.css">
       <link rel="stylesheet" href="components/modal/modal.css">
       <!-- endinjector -->
@@ -61,23 +63,22 @@
       <!-- bower:js -->
       <script src="/bower_components/jquery/dist/jquery.js"></script>
       <script src="/bower_components/angular/angular.js"></script>
-      <script src="/bower_components/angular-resource/angular-resource.js"></script>
-      <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
-      <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
-      <script src="/bower_components/angular-route/angular-route.js"></script>
+      <script src="/bower_components/angular-animate/angular-animate.js"></script>
       <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-      <script src="/bower_components/lodash/dist/lodash.compat.js"></script>
-      <script src="/bower_components/angular-socket-io/socket.js"></script>
-      <script src="/bower_components/angular-confirm-modal/angular-confirm.js"></script>
-      <script src="/bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
       <script src="/bower_components/Chart.js/Chart.js"></script>
       <script src="/bower_components/angular-chart.js/dist/angular-chart.js"></script>
-      <script src="/bower_components/angular-animate/angular-animate.js"></script>
+      <script src="/bower_components/angular-confirm-modal/angular-confirm.js"></script>
+      <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
+      <script src="/bower_components/angular-modal-service/dst/angular-modal-service.js"></script>
+      <script src="/bower_components/angular-resource/angular-resource.js"></script>
+      <script src="/bower_components/angular-route/angular-route.js"></script>
+      <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+      <script src="/bower_components/angular-socket-io/socket.js"></script>
+      <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+      <script src="/bower_components/lodash/dist/lodash.compat.js"></script>
       <!-- endbower -->
       <script src="socket.io-client/socket.io.js"></script>
     <!-- endbuild -->
-      <script src="http://code.highcharts.com/highcharts.src.js"></script>
-
 
         <!-- build:js(.tmp) app/app.js -->
 
@@ -89,8 +90,12 @@
           <script src="app/account/signup/signup.controller.js"></script>
           <script src="app/admin/admin.controller.js"></script>
           <script src="app/admin/admin.js"></script>
+          <script src="app/editPoll/editPoll.controller.js"></script>
+          <script src="app/editPoll/editPoll.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
+          <script src="app/newPoll/newPoll.controller.js"></script>
+          <script src="app/newPoll/newPoll.js"></script>
           <script src="app/pollAdd/pollAdd.controller.js"></script>
           <script src="app/pollAdd/pollAdd.js"></script>
           <script src="components/auth/auth.service.js"></script>

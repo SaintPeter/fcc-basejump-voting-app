@@ -1,9 +1,5 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-
-<header class="hero-unit" id="banner">
-  <h1>Anyone can vote!</h1>
-</header>
-
+<span class="text-center"><button ng-click="showAddPollModal()" class="btn btn-success">Add Poll</button></span>
 <div class="poll-container">
   <div class="col-md-4" ng-repeat="poll in polls">
       <div  class="panel panel-default" ng-if="voted(poll)" ng-animate="'if'">
