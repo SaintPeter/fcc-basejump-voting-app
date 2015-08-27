@@ -9,7 +9,8 @@ angular.module('meanApp', [
   'ui.bootstrap',
   'angular-confirm',
   "chart.js",
-  'ngAnimate'
+  'ngAnimate',
+  'angularModalService'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
