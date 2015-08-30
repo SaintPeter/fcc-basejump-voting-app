@@ -1,32 +1,27 @@
 <div class="modal fade">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" ng-click="close()" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title">Add New Poll</h4>
       </div>
       <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label>Question:</label>
-            <input name="question" type="text" placeholder="Enter your Question" ng-model="newPoll.question"></input>
-            <div class="form-group" ng-repeat="option in newPoll.options">
-                <div class="form-group">
-                  <label>Option {{ option.id + 1 }}</label>
-                  <input name="text" type="text" placeholder="Poll Option" ng-model="option.text">
-                  <button ng-hide="$first" class="btn btn-danger btn-xs" ng-click="deleteOption(option.id)"><i class="fa fa-minus fa-xs"></i></button>
-                </div>
+          <form>
+            <div class="form-group">
+              <label class="questionLabel">Question</label>
+              <input name="question" type="text" class="questionInput" placeholder="Enter your Question" ng-model="newPoll.question"></input>
             </div>
-            <button class="btn btn-success btn-xs" title="Add Poll Option" ng-click="addOption()"><i class="fa fa-plus fa-xs"></i></button>
-          </div>
-
-
-        </form>
-
+            <div class="form-group" ng-repeat="option in newPoll.options">
+                <label class="optionLabel">Option {{ option.id + 1 }}</label>
+                <input name="text" type="text" class="optionInput" placeholder="Poll Option" ng-model="option.text">
+                <button ng-hide="$first" class="btn btn-danger btn-xs" ng-click="deleteOption(option.id)"><i class="fa fa-minus fa-xs"></i></button>
+            </div>
+            <button class="btn btn-success btn-xs pull-right" title="Add Poll Option" ng-click="addOption()"><i class="fa fa-plus fa-xs"></i>&nbsp;Add Option</button>
+          </form>
       </div>
       <div class="modal-footer">
         <button class="btn btn-primary" data-dismiss="modal" ng-click="addPoll()">Save</button>
-        <button type="button" ng-click="cancel()" class="btn">Cancel</button>
+        <button type="button" ng-click="close()" data-dismiss="modal" class="btn">Cancel</button>
       </div>
     </div>
   </div>

@@ -1,3 +1,33 @@
-<div class="col-md-12">
-This is the editPoll view.
+<div class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" ng-click="close()" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Edit Poll</h4>
+      </div>
+      <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label class="questionLabel">Question</label>
+              <input name="question" type="text" class="questionInput" placeholder="Enter your Question" ng-model="editPoll.question" disabled></input>
+            </div>
+            <div class="form-group" ng-repeat="option in editPoll.options">
+                <label class="optionLabel">Option {{ option.id + 1 }}</label>
+                <input name="text" type="text" class="optionInput" placeholder="Poll Option" ng-model="option.text" disabled>
+                <button class="btn btn-danger btn-xs" ng-click="deleteOption(option.id)"><i class="fa fa-minus fa-xs"></i></button>
+            </div>
+            <div class="form-group" ng-repeat="option in editPoll.newOptions">
+                <label class="optionLabel">Option {{ option.id + 1 }}</label>
+                <input name="text" type="text" class="optionInput" placeholder="Poll Option" ng-model="option.text">
+                <button class="btn btn-danger btn-xs" ng-click="deleteOption(option.id)"><i class="fa fa-minus fa-xs"></i></button>
+            </div>
+            <button class="btn btn-success btn-xs pull-right" title="Add Poll Option" ng-click="addOption()"><i class="fa fa-plus fa-xs"></i>&nbsp;Add Option</button>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" data-dismiss="modal" ng-click="addPoll()">Update</button>
+        <button type="button" ng-click="close()" data-dismiss="modal" class="btn">Cancel</button>
+      </div>
+    </div>
+  </div>
 </div>

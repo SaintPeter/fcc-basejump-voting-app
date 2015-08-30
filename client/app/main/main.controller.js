@@ -2,29 +2,24 @@
 
 angular.module('meanApp')
   .controller('MainCtrl', function ($scope, $http, socket, Auth,$timeout, $routeParams, ModalService) {
+    var expanded = {};
     $scope.isLoggedIn = Auth.isLoggedIn;
 
-    $scope.showAddPollModal = function() {
-      ModalService.showModal({
-        templateUrl: "/app/newPoll/newPoll.html",
-        controller: "NewPollCtrl"
-      }).then(function(modal) {
-        //it's a bootstrap element, use 'modal' to show it
-        console.log(modal);
-        modal.element.modal();
-        modal.close.then(function(result) {
-          console.log(result);
-        });
+    // Function Assignments
+    $scope.addPoll = addPoll;
+    $scope.doEditPoll = doEditPoll;
+    $scope.toggleExpand = toggleExpand;
+    $scope.isExpanded = isExpanded;
 
-      }).catch(function(error) {
-          // error contains a detailed error message.
-          console.log("Error:", error);
-      });
-    };
+    $scope.doVote = doVote;
+    $scope.deletePoll = deletePoll;
+    $scope.pollOwner = pollOwner;
+    $scope.voted = voted;
+    $scope.editPoll = editPoll;
 
-    var expanded = {};
-    $scope.newPoll = { votes: [], options: [ { id: 0, text: ""} ]};
 
+
+    // Initial Poll Load
     $http.get('/api/polls').success(function(polls) {
       $scope.polls = polls; // .map(chartData);
 
@@ -42,12 +37,44 @@ angular.module('meanApp')
         }
       });
     });
+ 
+    function addPoll() {
+      ModalService.showModal({
+        templateUrl: "/app/newPoll/newPoll.html",
+        controller: "NewPollCtrl"
+      }).then(function(modal) {
+        modal.element.modal();
+        modal.close.then(function(result) {
+        });
 
-    $scope.expanded = function(poll) {
+      }).catch(function(error) {
+          // error contains a detailed error message.
+          console.log("Error:", error);
+      });
+    };
+
+    function doEditPoll(poll) {
+      alert('bing');
+      ModalService.showModal({
+        templateUrl: "/app/editPoll/editPoll.html",
+        controller: "EditPollCtrl",
+        inputs: {
+          thisPoll: poll
+        }
+      }).then(function(modal) {
+        modal.element.modal();
+        modal.close.then(function(result) {
+        });
+      }).catch(function(error) {
+          console.log("Error:", error);
+      });
+    };
+
+    function isExpanded(poll) {
       return expanded[poll.id];
     };
 
-    $scope.toggleExpand = function(poll) {
+    function toggleExpand(poll) {
       var temp = expanded[poll._id];
       Object.keys(expanded).forEach(function(item){expanded[item] = false;});
       expanded[poll._id] = !temp;
@@ -55,50 +82,15 @@ angular.module('meanApp')
       window.dispatchEvent(new Event('resize'));
     };
 
-    $scope.addPoll = function() {
-      if($scope.newPoll.question === "" || $scope.newPoll.options.length === 1) {
-        return;
-      }
-      $scope.newPoll.owner = Auth.getCurrentUser()._id;
-      $scope.newPoll.owner_name = Auth.getCurrentUser().name;
-      $scope.newPoll.created = new Date();
-
-      // Remove any blank answers:
-      $scope.newPoll.options = $scope.newPoll.options.filter(function(option) {
-        return option.text !== "";
-      });
-
-      // Renumber options, zero out votes:
-      var num = 0;
-      $scope.newPoll.options = $scope.newPoll.options.map(function(option){
-        option.id = num;
-        num++;
-        $scope.newPoll.votes[option.id] = 0;
-        return option;
-      });
-
-      $http.post('/api/polls', $scope.newPoll);
-      $scope.newPoll = { votes: [], options: [ { id: 0, text: ""} ]};
-    };
-
-    $scope.addOption = function() {
-      $scope.newPoll.options.push({
-          id: $scope.newPoll.options.length,
-          text: ""
-       });
-    };
-
-    $scope.deleteOption = function(del) {
-      $scope.newPoll.options = $scope.newPoll.options.filter(function(option){
-        return option.id !== del;
-      });
-    };
-
-    $scope.deletePoll = function(poll) {
+    function deletePoll(poll) {
       $http.delete('/api/polls/' + poll._id);
     };
 
-    $scope.voted = function(poll) {
+    function editPoll(poll) {
+
+    }
+
+    function voted(poll) {
       if($routeParams.forceVote) {
         return false;
       }
@@ -106,11 +98,12 @@ angular.module('meanApp')
       return poll.voters.indexOf(clientIP) != -1;
     };
 
-    $scope.doVote = function(poll, option) {
+    function doVote(poll, option) {
       $http.put('/api/polls/vote/' + poll._id, { voteFor: option.id });
     };
 
-    $scope.pollOwner = function(poll) {
+
+    function pollOwner(poll) {
       return poll.owner === Auth.getCurrentUser()._id;
     }
 

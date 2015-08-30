@@ -51,6 +51,23 @@
 }
 
 /**
+  * New/Edit Modals
+  */
+
+
+.questionLabel, .optionLabel {
+  width: 5em;
+}
+
+.optionLabel {
+  text-align: right;
+}
+
+.optionInput, .questionInput {
+  width: 60%;
+}
+
+/**
  * Poll Styles
  */
 
@@ -62,6 +79,10 @@
 
 .panel .heading-custom-poll:hover {
   background-color: yellow;
+}
+
+.pollFooter {
+  text-align: right; 
 }
 
 .author {
