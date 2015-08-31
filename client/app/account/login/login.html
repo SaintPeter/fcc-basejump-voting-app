@@ -1,14 +1,12 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
-
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <h1>Login</h1>
-      <p>Accounts are reset on server restart from <code>server/config/seed.js</code>. Default account is <code>test@test.com</code> / <code>test</code></p>
-      <p>Admin account is <code>admin@admin.com</code> / <code>admin</code></p>
-    </div>
-    <div class="col-sm-12">
-      <form class="form" name="form" ng-submit="login(form)" novalidate>
+<div class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" ng-click="close()" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Login</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form" name="form" ng-submit="login.submit(form)" novalidate>
 
         <div class="form-group">
           <label>Email</label>
@@ -32,7 +30,7 @@
 
           <p class="help-block">{{ errors.other }}</p>
         </div>
-
+        <hr>
         <div>
           <button class="btn btn-inverse btn-lg btn-login" type="submit">
             Login
@@ -40,16 +38,21 @@
           <a class="btn btn-default btn-lg btn-register" href="/signup">
             Register
           </a>
-        </div>
-
-        <hr>
-        <div>
-          <a class="btn btn-twitter" href="" ng-click="loginOauth('twitter')">
-            <i class="fa fa-twitter"></i> Connect with Twitter
-          </a>
+          <button class="btn btn-inverse btn-lg btn-login" ng-click="close()" data-dismiss="modal">
+            Cancel
+          </button>
         </div>
       </form>
     </div>
+    <div class="modal-footer">
+
+      <div>
+        <hr>
+        <a class="btn btn-twitter" href="" ng-click="loginOauth('twitter')">
+          <i class="fa fa-twitter"></i> Connect with Twitter
+        </a>
+      </div>
+    </div>
   </div>
-  <hr>
+</div>
 </div>

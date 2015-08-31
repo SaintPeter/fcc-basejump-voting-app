@@ -36,7 +36,7 @@ angular.module('meanApp', [
       // Intercept 401s and redirect you to login
       responseError: function(response) {
         if(response.status === 401) {
-          $location.path('/login');
+          //$location.path('/login');
           // remove any stale tokens
           $cookieStore.remove('token');
           return $q.reject(response);
@@ -55,13 +55,7 @@ angular.module('meanApp', [
         if (next.authenticate && !loggedIn) {
           event.preventDefault();
 
-          // store the requested url if not logged in
-          if ($location.url() != '/login')
-          {
-            $cookieStore.put('returnUrl', $location.url());
-          }
-
-          $location.path('/login');
+          $location.path('/');
         }
       });
     });

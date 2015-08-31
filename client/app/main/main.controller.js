@@ -38,38 +38,38 @@ angular.module('meanApp')
       });
     });
 
-    // Display the Modal Dialog for the new Poll interface
-    function addPoll() {
-      ModalService.showModal({
-        templateUrl: "/app/newPoll/newPoll.html",
-        controller: "NewPollCtrl"
-      }).then(function(modal) {
-        modal.element.modal();
-        modal.close.then(function(result) {
+    function doShowModal(controllerObj) {
+      ModalService.showModal(controllerObj)
+        .then(function(modal) {
+          modal.element.modal();
+          modal.close.then(function(result) {
         });
-
       }).catch(function(error) {
           // error contains a detailed error message.
           console.log("Error:", error);
+      });
+    }
+
+    // Display the Modal Dialog for the new Poll interface
+    function addPoll() {
+      doShowModal({
+        templateUrl: "/app/newPoll/newPoll.html",
+        controller: "NewPollCtrl"
       });
     };
 
     // Display the modal dialog for the edit poll interface
     function doEditPoll(poll) {
-      ModalService.showModal({
+      doShowModal({
         templateUrl: "/app/editPoll/editPoll.html",
         controller: "EditPollCtrl",
         inputs: {
           thisPoll: poll
         }
-      }).then(function(modal) {
-        modal.element.modal();
-        modal.close.then(function(result) {
-        });
-      }).catch(function(error) {
-          console.log("Error:", error);
       });
     };
+
+
 
     function isExpanded(poll) {
       return expanded[poll.id];
