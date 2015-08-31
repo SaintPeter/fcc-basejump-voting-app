@@ -37,7 +37,8 @@ angular.module('meanApp')
         }
       });
     });
- 
+
+    // Display the Modal Dialog for the new Poll interface
     function addPoll() {
       ModalService.showModal({
         templateUrl: "/app/newPoll/newPoll.html",
@@ -53,8 +54,8 @@ angular.module('meanApp')
       });
     };
 
+    // Display the modal dialog for the edit poll interface
     function doEditPoll(poll) {
-      alert('bing');
       ModalService.showModal({
         templateUrl: "/app/editPoll/editPoll.html",
         controller: "EditPollCtrl",

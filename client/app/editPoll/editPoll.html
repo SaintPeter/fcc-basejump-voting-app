@@ -14,9 +14,8 @@
             <div class="form-group" ng-repeat="option in editPoll.options">
                 <label class="optionLabel">Option {{ option.id + 1 }}</label>
                 <input name="text" type="text" class="optionInput" placeholder="Poll Option" ng-model="option.text" disabled>
-                <button class="btn btn-danger btn-xs" ng-click="deleteOption(option.id)"><i class="fa fa-minus fa-xs"></i></button>
             </div>
-            <div class="form-group" ng-repeat="option in editPoll.newOptions">
+            <div class="form-group" ng-repeat="option in newOptions">
                 <label class="optionLabel">Option {{ option.id + 1 }}</label>
                 <input name="text" type="text" class="optionInput" placeholder="Poll Option" ng-model="option.text">
                 <button class="btn btn-danger btn-xs" ng-click="deleteOption(option.id)"><i class="fa fa-minus fa-xs"></i></button>
@@ -25,7 +24,7 @@
           </form>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-primary" data-dismiss="modal" ng-click="addPoll()">Update</button>
+        <button class="btn btn-primary" data-dismiss="modal" ng-click="savePoll()">Update</button>
         <button type="button" ng-click="close()" data-dismiss="modal" class="btn">Cancel</button>
       </div>
     </div>

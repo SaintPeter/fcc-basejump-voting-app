@@ -1,14 +1,15 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <span class="text-center" ng-show="isLoggedIn"><button ng-click="addPoll()" class="btn btn-success">Add Poll</button></span>
 <div class="poll-container">
-  <div class="col-md-4" ng-repeat="poll in polls">
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" ng-repeat="poll in polls">
 
       <div  class="panel panel-default">
         <div class="panel-heading heading-custom-poll" ng-click="toggleExpand(poll)">
           <h3 class="panel-title">
-              <span class="totalVotes pull-left" ng-class="{voted: voted(poll)}"> {{ poll.totalVotes }} </span>
-              {{ poll.question }}
-              <br /><a class="author" href="#"> {{ poll.owner_name }} </a>
+              <span class="totalVotes" ng-class="{voted: voted(poll)}"> {{ poll.totalVotes }} </span>
+              <span class="question">{{ poll.question }}</span>
+              <hr>
+              <a class="author" href="#"> {{ poll.owner_name }} </a>
           </h3>
         </div>
 
@@ -23,11 +24,11 @@
         </div>
 
         <div class="panel-footer pollFooter" ng-show="pollOwner(poll) && isExpanded(poll)">
-          <button class="btn btn-success btn-xs" ng-click="doEditPoll(poll)">
-            Edit &nbsp;<i class="fa fa-edit fa-xs"></i>
+          <button class="btn btn-success" ng-click="doEditPoll(poll)">
+            Edit &nbsp;<i class="fa fa-edit"></i>
           </button>
-          <button class="btn btn-danger btn-xs" confirm="Are you sure you want to delete this poll?" ng-click="deletePoll(poll)">
-            Delete&nbsp;<i class="fa fa-times fa-xs"></i>
+          <button class="btn btn-danger" confirm="Are you sure you want to delete this poll?" ng-click="deletePoll(poll)">
+            Delete&nbsp;<i class="fa fa-times"></i>
           </button>
         </div>
 
