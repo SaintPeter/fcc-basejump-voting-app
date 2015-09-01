@@ -19,13 +19,17 @@ angular.module('meanApp')
             password: $scope.user.password
           })
           .then( function() {
-              close('done',500);
+              close('done');
           })
           .catch( function(err) {
             $scope.errors.other = err.message;
           });
         }
       }
+    };
+
+    $scope.signup = function() {
+      close('signup');
     };
 
     $scope.loginOauth = function(provider) {

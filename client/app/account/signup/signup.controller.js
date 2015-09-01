@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('meanApp')
-  .controller('SignupCtrl', function ($scope, Auth, $location, $window) {
+  .controller('SignupCtrl', function ($scope, Auth, $location, $window, close) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -29,6 +29,10 @@ angular.module('meanApp')
           });
         });
       }
+    };
+
+    $scope.login = function() {
+      close('login');
     };
 
     $scope.loginOauth = function(provider) {

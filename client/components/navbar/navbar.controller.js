@@ -20,12 +20,15 @@ angular.module('meanApp')
       return route === $location.path();
     };
 
-    function doShowModal(controllerObj) {
+    function doShowModal(controllerObj, callback) {
       ModalService.showModal(controllerObj)
         .then(function(modal) {
           modal.element.modal();
           modal.close.then(function(result) {
             $('.modal-backdrop').remove();
+            if(typeof callback === 'function') {
+              callback(result);
+            }
         });
       }).catch(function(error) {
           // error contains a detailed error message.
@@ -38,6 +41,10 @@ angular.module('meanApp')
       doShowModal({
         templateUrl: 'app/account/login/login.html',
         controller: 'LoginCtrl'
+      }, function(result) {
+        if(result === 'signup') {
+          $scope.doSignup();
+        }
       });
     };
 
@@ -49,7 +56,11 @@ angular.module('meanApp')
       doShowModal({
         templateUrl: 'app/account/signup/signup.html',
         controller: 'SignupCtrl'
+      }, function(result) {
+        if(result === 'login') {
+          $scope.doLogin();
+        }
       });
     };
-
+    
   });
