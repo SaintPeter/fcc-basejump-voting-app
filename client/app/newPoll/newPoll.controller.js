@@ -15,6 +15,7 @@ angular.module('meanApp')
       $scope.newPoll.owner = Auth.getCurrentUser()._id;
       $scope.newPoll.owner_name = Auth.getCurrentUser().name;
       $scope.newPoll.created = new Date();
+      $scope.newPoll.totalVotes = 0;
 
       // Remove any blank answers:
       $scope.newPoll.options = $scope.newPoll.options.filter(function(option) {

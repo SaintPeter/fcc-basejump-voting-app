@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('meanApp')
-  .controller('EditPollCtrl', function ($scope, thisPoll) {
+  .controller('EditPollCtrl', function ($scope, thisPoll, $http) {
     $scope.editPoll = thisPoll;
     $scope.newOptions = [];
 
     $scope.addOption = function() {
       $scope.newOptions.push({
-          id: $scope.editPoll.options.length + $scopt.newOptions.length,
+          id: $scope.editPoll.options.length + $scope.newOptions.length,
           text: ""
        });
     };
@@ -15,7 +15,7 @@ angular.module('meanApp')
     // Renumber options
     function renumberNewOptions() {
       // Start at the end of the current options
-      var num = $scope.editPoll.options.length - 1;
+      var num = $scope.editPoll.options.length;
 
       // Renumber all the new options
       $scope.newOptions = $scope.newOptions.map(function(option){
@@ -42,15 +42,15 @@ angular.module('meanApp')
       renumberNewOptions();
 
       // Append newOptions to exiting poll
-      $scope.editPoll.options.concat($scope.newOptions);
+      $scope.editPoll.options = $scope.editPoll.options.concat($scope.newOptions);
 
       // Create an array as long as the new options
       var newBlanks = Array.apply(null, Array($scope.newOptions.length)).map(Number.prototype.valueOf,0);
 
       // Append it to the current votes:
-      $scope.editPoll.options = $scope.editPoll.options.concat(newBlanks);
+      $scope.editPoll.votes = $scope.editPoll.votes.concat(newBlanks);
 
-      $http.put('/api/polls', $scope.editPoll);
+      $http.put('/api/polls/' + $scope.editPoll._id, $scope.editPoll);
     };
 
   });

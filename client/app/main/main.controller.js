@@ -12,6 +12,7 @@ angular.module('meanApp')
     $scope.isExpanded = isExpanded;
 
     $scope.doVote = doVote;
+    $scope.clearPoll = clearPoll;
     $scope.deletePoll = deletePoll;
     $scope.pollOwner = pollOwner;
     $scope.voted = voted;
@@ -103,6 +104,9 @@ angular.module('meanApp')
       $http.put('/api/polls/vote/' + poll._id, { voteFor: option.id });
     };
 
+    function clearPoll(poll) {
+      $http.get('/api/polls/clear/' + poll._id);
+    };
 
     function pollOwner(poll) {
       return poll.owner === Auth.getCurrentUser()._id;

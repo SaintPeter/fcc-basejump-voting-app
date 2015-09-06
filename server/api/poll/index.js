@@ -10,6 +10,7 @@ router.get('/:id', controller.show);
 router.post('/', controller.create);
 router.put('/:id', controller.update);
 router.put('/vote/:id', controller.vote);
+router.get('/clear/:id', controller.clearVotes);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 

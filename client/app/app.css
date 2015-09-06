@@ -64,6 +64,10 @@
   padding: 20px;
 }
 
+.voteList {
+  list-style: none;
+}
+
 /**
   * New/Edit Modals
   */
