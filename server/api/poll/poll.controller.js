@@ -20,6 +20,15 @@ exports.show = function(req, res) {
   });
 };
 
+// Get a single poll by the friendly URL
+exports.friendly = function(req, res) {
+  Poll.find( { friendly: req.params.id }, function (err, poll) {
+    if(err) { return handleError(res, err); }
+    if(!poll) { return res.status(404).send('Not Found'); }
+    return res.json(poll[0]);
+  });
+};
+
 // Creates a new poll in the DB.
 exports.create = function(req, res) {
   Poll.create(req.body, function(err, poll) {

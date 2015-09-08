@@ -7,6 +7,7 @@ var router = express.Router();
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);
+router.get('/friendly/:id', controller.friendly);
 router.post('/', controller.create);
 router.put('/:id', controller.update);
 router.put('/vote/:id', controller.vote);

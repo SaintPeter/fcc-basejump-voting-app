@@ -3,6 +3,8 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
+var slugin = require('slugin');
+
 var PollSchema = new Schema({
   question: String,
   created: Date,
@@ -63,11 +65,17 @@ PollSchema.virtual('chartData').get(function() {
   return data;
 });
 
+// Slugify the question to a friendly url
+PollSchema.plugin(slugin, {
+  slugName: 'friendly',
+  source: 'question',
+  modelName: 'Poll'
+});
 
 // Include charts in output
 PollSchema.set('toJSON', {
   virtuals: true
 });
-//PollSchema.pre('init', PollSchema.methods.updateChart);
+
 
 module.exports = mongoose.model('Poll', PollSchema);
