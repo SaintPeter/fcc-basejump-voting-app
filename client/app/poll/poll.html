@@ -1,0 +1,54 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="poll-container" ng-show="ready">
+  <div class=".hidden-xs col-sm-3 col-md-3 col-lg-3"></div>
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+
+      <div  class="panel panel-default">
+        <div class="panel-heading heading-custom-poll">
+          <h3 class="panel-title">
+              <span class="totalVotes" ng-class="{voted: voted(poll)}"> {{ poll.totalVotes }} </span>
+              <span class="question">{{ poll.question }}</span>
+              <hr>
+              <a class="author" href="#"> {{ poll.owner_name }} </a>
+          </h3>
+        </div>
+
+        <div class="panel-body poll-body slide" ng-show="voted(poll)">
+          <canvas id="doughnut" class="chart chart-doughnut" data="poll.chartData" labels="poll.chartLabels" legend="true"></canvas>
+        </div>
+
+        <div class="panel-body poll-body slide" ng-show="!voted(poll)">
+          <ul ng-repeat="option in poll.options" class="voteList">
+            <li>
+              <button class="btn btn-info btn-xs" ng-click="doVote(poll, option)">
+                Vote
+              </button>
+              {{ option.text }}
+            </li>
+          </ul>
+        </div>
+
+        <div class="panel-footer pollFooter" ng-show="pollOwner(poll) && isExpanded(poll)">
+          <button class="btn btn-success" ng-click="doEditPoll(poll)">
+            Edit &nbsp;<i class="fa fa-edit"></i>
+          </button>
+          <button class="btn btn-warning" confirm="Are you sure you want to clear all votes?" ng-click="clearPoll(poll)">
+            Clear &nbsp;<i class="fa fa-times"></i>
+          </button>
+          <button class="btn btn-danger" confirm="Are you sure you want to delete this poll?" ng-click="deletePoll(poll)">
+            Delete &nbsp;<i class="fa fa-times"></i>
+          </button>
+        </div>
+      </div>
+  </div>
+  <div class=".hidden-xs col-sm-3 col-md-3 col-lg-3"></div>
+  <div class="clearfix"></div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+      <p>Angular Fullstack v2.1.0 |
+        <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
+         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
+  </div>
+</footer>

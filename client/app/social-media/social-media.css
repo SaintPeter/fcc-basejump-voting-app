@@ -1,0 +1,33 @@
+.share {
+  border: none;
+  border-radius: 50%;
+  line-height: 25px;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  color: white;
+}
+
+.share:visited {
+  color: white;
+}
+
+.share:hover {
+  color: white;
+}
+
+.share-facebook {
+  background-color: #3b5998;
+}
+
+.share-facebook:hover {
+  background-color: #8b9dc3;
+}
+
+.share-twitter {
+  background-color: #326ada;
+}
+
+.share-twitter:hover {
+  background-color: #433e90
+}
