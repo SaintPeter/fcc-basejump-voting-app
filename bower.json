@@ -8,6 +8,7 @@
     "angular-chart.js": "~0.7.3",
     "angular-confirm-modal": "~1.1.0",
     "angular-cookies": ">=1.2.*",
+    "angular-encode-uri": "~1.0.0",
     "angular-modal-service": "~0.6.7",
     "angular-resource": ">=1.2.*",
     "angular-route": ">=1.2.*",
