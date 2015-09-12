@@ -1,7 +1,7 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div class="poll-container" ng-show="ready">
   <div class=".hidden-xs col-sm-3 col-md-3 col-lg-3"></div>
-  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" ng-repeat="poll in polls">
 
       <div  class="panel panel-default">
         <div class="panel-heading heading-custom-poll">
@@ -28,7 +28,7 @@
           </ul>
         </div>
 
-        <div class="panel-footer pollFooter" ng-show="pollOwner(poll) && isExpanded(poll)">
+        <div class="panel-footer pollFooter" ng-show="pollOwner(poll)">
           <button class="btn btn-success" ng-click="doEditPoll(poll)">
             Edit &nbsp;<i class="fa fa-edit"></i>
           </button>

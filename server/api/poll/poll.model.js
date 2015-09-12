@@ -77,5 +77,8 @@ PollSchema.set('toJSON', {
   virtuals: true
 });
 
+// Disable version key
+PollSchema.set('versionKey', false);
+
 
 module.exports = mongoose.model('Poll', PollSchema);

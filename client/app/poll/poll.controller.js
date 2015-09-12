@@ -1,21 +1,24 @@
 'use strict';
 
 angular.module('meanApp')
-  .controller('PollCtrl', function ($scope, Auth, $http, $routeParams) {
+  .controller('PollCtrl', function ($scope, socket, Auth, $http, $routeParams, ModalService) {
     $scope.ready = false;
+    $scope.polls = [];
     // Load needed data
     $http.get('/api/polls/friendly/' + $routeParams.friendly)
       .then(function(response) {
         // Success
-        $scope.poll = response.data;
+        $scope.polls.push(response.data);
         $scope.ready = true;
+
+        socket.syncUpdates('poll', $scope.polls, function(event, item, array){
+        });
       }, function(response) {
         // Error
         console.log(response);
       });
 
       // Function Assignments
-      $scope.addPoll = addPoll;
       $scope.doEditPoll = doEditPoll;
 
       $scope.doVote = doVote;
@@ -35,14 +38,6 @@ angular.module('meanApp')
             console.log("Error:", error);
         });
       }
-
-      // Display the Modal Dialog for the new Poll interface
-      function addPoll() {
-        doShowModal({
-          templateUrl: "/app/newPoll/newPoll.html",
-          controller: "NewPollCtrl"
-        });
-      };
 
       // Display the modal dialog for the edit poll interface
       function doEditPoll(poll) {
