@@ -53,7 +53,7 @@ angular.module('meanApp')
     // Display the Modal Dialog for the new Poll interface
     function addPoll() {
       doShowModal({
-        templateUrl: "/app/newPoll/newPoll.html",
+        templateUrl: "app/newPoll/newPoll.html",
         controller: "NewPollCtrl"
       });
     };
@@ -61,7 +61,7 @@ angular.module('meanApp')
     // Display the modal dialog for the edit poll interface
     function doEditPoll(poll) {
       doShowModal({
-        templateUrl: "/app/editPoll/editPoll.html",
+        templateUrl: "app/editPoll/editPoll.html",
         controller: "EditPollCtrl",
         inputs: {
           thisPoll: poll

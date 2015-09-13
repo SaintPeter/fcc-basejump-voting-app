@@ -29,7 +29,6 @@
 
         <div class="panel-footer pollFooter" ng-show="isExpanded(poll)">
           <social-media url="http://poll-tastic.herokuapp.com/poll/{{ poll.friendly }}" text="{{ poll.question }}"></social-media>
-          <a href="/poll/{{ poll.friendly }}" class="pull-left">Permalink</a>
           <div ng-show="pollOwner(poll)">
             <button class="btn btn-success" ng-click="doEditPoll(poll)">
               Edit &nbsp;<i class="fa fa-edit"></i>

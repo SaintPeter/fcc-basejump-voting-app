@@ -42,7 +42,7 @@ angular.module('meanApp')
       // Display the modal dialog for the edit poll interface
       function doEditPoll(poll) {
         doShowModal({
-          templateUrl: "/app/editPoll/editPoll.html",
+          templateUrl: "app/editPoll/editPoll.html",
           controller: "EditPollCtrl",
           inputs: {
             thisPoll: poll

@@ -24,7 +24,7 @@ exports.show = function(req, res) {
 exports.friendly = function(req, res) {
   Poll.find( { friendly: req.params.id }, function (err, poll) {
     if(err) { return handleError(res, err); }
-    if(!poll) { return res.status(404).send('Not Found'); }
+    if(!poll || poll.length === 0) { return res.status(404).send('Not Found'); }
     return res.json(poll[0]);
   });
 };
