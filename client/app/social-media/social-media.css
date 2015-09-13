@@ -6,6 +6,7 @@
   height: 25px;
   text-align: center;
   color: white;
+  margin-right: 5px;
 }
 
 .share:visited {
@@ -30,4 +31,12 @@
 
 .share-twitter:hover {
   background-color: #433e90
+}
+
+.share-permalink {
+  background-color: #888888;
+}
+
+.share-permalink:hover {
+  background-color: #777777;
 }
