@@ -4,6 +4,7 @@ angular.module('meanApp')
   .controller('MainCtrl', function ($scope, $http, socket, Auth,$timeout, $routeParams, ModalService) {
     var expanded = {};
     $scope.isLoggedIn = Auth.isLoggedIn;
+    $scope.myPolls = false;
 
     // Function Assignments
     $scope.addPoll = addPoll;
@@ -17,8 +18,6 @@ angular.module('meanApp')
     $scope.pollOwner = pollOwner;
     $scope.voted = voted;
     $scope.editPoll = editPoll;
-
-
 
     // Initial Poll Load
     $http.get('/api/polls').success(function(polls) {

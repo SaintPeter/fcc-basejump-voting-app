@@ -1,6 +1,6 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div class="poll-container">
-  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" ng-repeat="poll in polls">
+  <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" ng-repeat="poll in polls" ng-show="!myPolls || (myPolls && pollOwner(poll))">
 
       <div  class="panel panel-default">
         <div class="panel-heading heading-custom-poll" ng-click="toggleExpand(poll)">
@@ -58,7 +58,7 @@
         <button ng-click="addPoll()" class="btn btn-success btn-block">
           Add Poll
         </button>
-        <button ng-click="toggleMyPolls()"  class="btn btn-default btn-block" type="button" data-toggle="button" aria-pressed="false" autocomplete="off">
+        <button ng-click="myPolls = !myPolls"  class="btn btn-default btn-block" type="button" data-toggle="button" aria-pressed="false" autocomplete="off">
           My Polls
         </button>
       </div>
