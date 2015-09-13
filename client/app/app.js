@@ -12,7 +12,7 @@ angular.module('meanApp', [
   'ngAnimate',
   'angularModalService'
 ])
-  .config(function ($routeProvider, $locationProvider, $httpProvider) {
+  .config(function ($routeProvider, $locationProvider, $httpProvider, ChartJsProvider) {
     $routeProvider
       .otherwise({
         redirectTo: '/'
@@ -20,6 +20,12 @@ angular.module('meanApp', [
 
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');
+
+    // Default Colors for chart.js
+    ChartJsProvider.setOptions({
+              // Green     Purple   Red        cyan      orange     blue
+      colours: ['#40ad48','#91268f','#ed1c24','#00adef','#f7931d','#24408e','#fff100' ]
+    });
   })
 
   .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
