@@ -7,13 +7,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <base href="/">
-    <title></title>
+    <title>Polltastic!</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
-    <link type="image/x-icon" href="images/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
       <link rel="stylesheet" href="/bower_components/angular-chart.js/dist/angular-chart.css" />
@@ -40,6 +38,15 @@
     <script type="text/javascript">
       var clientIP = '<%= clientIP %>';
     </script>
+    <!-- UserAgent Data -->
+    <% if(typeof type === 'string' && type === 'facebook') { %>
+      <meta property="og:url"         content="http://poll-tastic.herokuapp.com/poll/<%= pollData.friendly %>" />
+      <meta property="og:type"        content="website" />
+      <meta property="og:title"       content="<%= pollData.question %>" />
+      <meta property="og:description" content="Polltastic! Answer polls with your friends!" />
+      <meta property="og:image"       content="http://poll-tastic.herokuapp.com/images/facebook_title.png" />
+
+    <% } %>
   </head>
   <body ng-app="meanApp">
     <!--[if lt IE 7]>

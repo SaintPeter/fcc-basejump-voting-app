@@ -18,6 +18,7 @@ var passport = require('passport');
 var session = require('express-session');
 var mongoStore = require('connect-mongo')(session);
 var mongoose = require('mongoose');
+var useragent = require('express-useragent');
 
 module.exports = function(app) {
   var env = app.get('env');
@@ -30,6 +31,7 @@ module.exports = function(app) {
   app.use(bodyParser.json());
   app.use(methodOverride());
   app.use(cookieParser());
+  app.use(useragent.express()); // useragent middleware
   app.use(passport.initialize());
 
   // Persist sessions with mongoStore
