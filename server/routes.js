@@ -54,10 +54,17 @@ module.exports = function(app) {
       }
 
       promise.then(function(){
+        var ipAddr = req.headers["x-forwarded-for"];
+        if (ipAddr){
+          var list = ipAddr.split(",");
+          ipAddr = list[list.length-1];
+        } else {
+          ipAddr = req.connection.remoteAddress;
+        }
          res.render('pages/index', {
            type: type,
            pollData: pollData,
-           clientIP: req.ip
+           clientIP: ipAddr
          });
        });
      });
@@ -65,6 +72,13 @@ module.exports = function(app) {
   // All other routes should redirect to the index.html
   app.route('/*')
     .get(function(req, res) {
-      res.render('pages/index', { clientIP: req.ip } );
+      var ipAddr = req.headers["x-forwarded-for"];
+      if (ipAddr){
+        var list = ipAddr.split(",");
+        ipAddr = list[list.length-1];
+      } else {
+        ipAddr = req.connection.remoteAddress;
+      }
+      res.render('pages/index', { clientIP: ipAddr } );
     });
 };

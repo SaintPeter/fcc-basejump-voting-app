@@ -60,7 +60,14 @@ exports.vote = function(req, res) {
     var updated = _.extend(poll, req.body);
 
     // Add voter IP
-    updated.voters.push(req.ip);
+    var ipAddr = req.headers["x-forwarded-for"];
+    if (ipAddr){
+      var list = ipAddr.split(",");
+      ipAddr = list[list.length-1];
+    } else {
+      ipAddr = req.connection.remoteAddress;
+    }
+    updated.voters.push(ipAddr);
 
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
