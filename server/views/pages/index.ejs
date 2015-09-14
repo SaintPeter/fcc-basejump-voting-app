@@ -46,6 +46,13 @@
       <meta property="og:description" content="Polltastic! Answer polls with your friends!" />
       <meta property="og:image"       content="http://poll-tastic.herokuapp.com/assets/images/facebook_title.png" />
     <% } %>
+    <% if(typeof type === 'string' && type === 'twitter') { %>
+      <meta name="twitter:card"        content="summary" />
+      <meta name="twitter:site"        content="@rexitas" />
+      <meta name="twitter:title"       content="<%= pollData.question %>" />
+      <meta name="twitter:description" content="Polltastic! Answer polls with your friends!" />
+      <meta name="twitter:image"       content="http://poll-tastic.herokuapp.com/assets/images/twitter_title.png" />
+    <% } %>
   </head>
   <body ng-app="meanApp">
     <!--[if lt IE 7]>

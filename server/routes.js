@@ -27,7 +27,7 @@ module.exports = function(app) {
        var type = '';
        var pollData = {};
 
-       // Determine
+       // Determine user agent for social media crawlers
        switch(true) {
          case /facebookexternalhit/i.test(req.useragent.source):
             type = 'facebook';
@@ -38,7 +38,6 @@ module.exports = function(app) {
         default:
             type = 'none';
       }
-      console.log("Type:", type, "Source:", req.useragent.source);
 
       // If we recognize the user-agent, pull pollData
       if(type !== 'none') {
@@ -53,6 +52,7 @@ module.exports = function(app) {
         promise.fulfill();
       }
 
+      // Once we have the poll data (or not), render the page
       promise.then(function(){
         var ipAddr = req.headers["x-forwarded-for"];
         if (ipAddr){
