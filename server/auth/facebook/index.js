@@ -8,7 +8,7 @@ var router = express.Router();
 
 router
   .get('/', passport.authenticate('facebook', {
-    scope: ['email', 'public_profile'],
+    scope: ['email', 'user_about_me'],
     failureRedirect: '/',
     session: false
   }))
