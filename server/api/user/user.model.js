@@ -146,4 +146,7 @@ UserSchema.methods = {
   }
 };
 
+// Disable version key
+UserSchema.set('versionKey', false);
+
 module.exports = mongoose.model('User', UserSchema);
