@@ -18,7 +18,7 @@ exports.setup = function (User, config) {
         if (!user) {
           user = new User({
             name: profile.displayName,
-            email: profile.emails[0].value,
+            email: profile.email,
             role: 'user',
             username: profile.username,
             provider: 'facebook',
