@@ -39,10 +39,10 @@ angular.module('meanApp')
           var index = array.indexOf(oldItem);
           var event = 'created';
 
-          // replace oldItem if it exists
+          // extend oldItem if it exists
           // otherwise just add item to the collection
           if (oldItem) {
-            array.splice(index, 1, item);
+            angular.extend(array[index], item);
             event = 'updated';
           } else {
             array.push(item);

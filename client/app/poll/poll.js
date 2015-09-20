@@ -5,6 +5,6 @@ angular.module('meanApp')
     $routeProvider
       .when('/poll/:friendly', {
         templateUrl: 'app/poll/poll.html',
-        controller: 'PollCtrl'
+        controller: 'PollCtrl' 
       });
   });

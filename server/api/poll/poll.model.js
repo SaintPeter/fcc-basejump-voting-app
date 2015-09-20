@@ -37,9 +37,9 @@ PollSchema.virtual('chartLabels').get(function() {
       labels = [];
 
   // Sort the poll options for display
-  poll.options = poll.options.sort(function(a,b) {
-    return poll.votes[b.id] - poll.votes[a.id];
-  });
+  // poll.options = poll.options.sort(function(a,b) {
+  //   return poll.votes[b.id] - poll.votes[a.id];
+  // });
 
   poll.options.forEach(function(option){
     labels.push(option.text);
@@ -53,9 +53,9 @@ PollSchema.virtual('chartData').get(function() {
       data = [];
 
   // Sort the poll options for display
-  poll.options = poll.options.sort(function(a,b) {
-    return poll.votes[b.id] - poll.votes[a.id];
-  });
+  // poll.options = poll.options.sort(function(a,b) {
+  //   return poll.votes[b.id] - poll.votes[a.id];
+  // });
 
   poll.options.forEach(function(option){
     var y = poll.votes[option.id] / poll.totalVotes * 100;
