@@ -76,7 +76,7 @@ angular.module('meanApp')
       };
 
       function pollOwner(poll) {
-        return poll ? poll.owner === Auth.getCurrentUser()._id : false;
+        return (poll.owner === Auth.getCurrentUser()._id) || Auth.getCurrentUser().role === 'admin';
       }
 
       $scope.$on('$destroy', function () {

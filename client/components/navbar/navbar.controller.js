@@ -48,9 +48,6 @@ angular.module('meanApp')
       });
     };
 
-    // Display Settings Modal
-
-
     // Display Signup Modal
     $scope.doSignup = function() {
       doShowModal({
@@ -62,5 +59,5 @@ angular.module('meanApp')
         }
       });
     };
-    
+
   });

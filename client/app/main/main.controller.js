@@ -38,17 +38,45 @@ angular.module('meanApp')
       });
     });
 
-    function doShowModal(controllerObj) {
+    function doShowModal(controllerObj, callback) {
       ModalService.showModal(controllerObj)
         .then(function(modal) {
           modal.element.modal();
           modal.close.then(function(result) {
+            $('.modal-backdrop').remove();
+            if(typeof callback === 'function') {
+              callback(result);
+            }
         });
       }).catch(function(error) {
           // error contains a detailed error message.
           console.log("Error:", error);
       });
     }
+
+    // Display login modal
+    $scope.doLogin = function() {
+      doShowModal({
+        templateUrl: 'app/account/login/login.html',
+        controller: 'LoginCtrl'
+      }, function(result) {
+        if(result === 'signup') {
+          $scope.doSignup();
+        }
+      });
+    };
+
+    // Display Signup Modal
+    $scope.doSignup = function() {
+      doShowModal({
+        templateUrl: 'app/account/signup/signup.html',
+        controller: 'SignupCtrl'
+      }, function(result) {
+        if(result === 'login') {
+          $scope.doLogin();
+        }
+      });
+    };
 
     // Display the Modal Dialog for the new Poll interface
     function addPoll() {
@@ -79,6 +107,7 @@ angular.module('meanApp')
       var temp = expanded[poll._id];
       Object.keys(expanded).forEach(function(item){expanded[item] = false;});
       expanded[poll._id] = !temp;
+      poll.updated = false;
       // Force redraw
       window.dispatchEvent(new Event('resize'));
     };
@@ -108,7 +137,7 @@ angular.module('meanApp')
     };
 
     function pollOwner(poll) {
-      return poll.owner === Auth.getCurrentUser()._id;
+      return (poll.owner === Auth.getCurrentUser()._id) || Auth.getCurrentUser().role === 'admin';
     }
 
     $scope.$on('$destroy', function () {

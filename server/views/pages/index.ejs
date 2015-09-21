@@ -39,21 +39,35 @@
     <script type="text/javascript">
       var clientIP = '<%= clientIP %>';
     </script>
-    <!-- UserAgent Data -->
-    <% if(typeof type === 'string' && type === 'facebook') { %>
+
+    <% if(typeof type === 'string' && type === 'poll') { %>
+      <!-- Poll Meta-Data -->
       <meta property="og:url"         content="http://poll-tastic.herokuapp.com/poll/<%= pollData.friendly %>" />
       <meta property="og:type"        content="website" />
       <meta property="og:title"       content="<%= pollData.question %>" />
       <meta property="og:description" content="Polltastic! Answer polls with your friends!" />
       <meta property="og:image"       content="http://poll-tastic.herokuapp.com/assets/images/facebook_title.png" />
-    <% } %>
-    <% if(typeof type === 'string' && type === 'twitter') { %>
+
       <meta name="twitter:card"        content="summary" />
       <meta name="twitter:site"        content="@rexitas" />
       <meta name="twitter:title"       content="<%= pollData.question %>" />
       <meta name="twitter:description" content="Polltastic! Answer polls with your friends!" />
       <meta name="twitter:image"       content="http://poll-tastic.herokuapp.com/assets/images/twitter_title.png" />
+    <% } else { %>
+      <!-- Site Meta-Data -->
+      <meta property="og:url"         content="http://poll-tastic.herokuapp.com" />
+      <meta property="og:type"        content="website" />
+      <meta property="og:title"       content="PollTastic!" />
+      <meta property="og:description" content="Answer polls with your friends!" />
+      <meta property="og:image"       content="http://poll-tastic.herokuapp.com/assets/images/facebook_title.png" />
+
+      <meta name="twitter:card"        content="summary" />
+      <meta name="twitter:site"        content="@rexitas" />
+      <meta name="twitter:title"       content="PollTastic!" />
+      <meta name="twitter:description" content="Answer polls with your friends!" />
+      <meta name="twitter:image"       content="http://poll-tastic.herokuapp.com/assets/images/twitter_title.png" />
     <% } %>
+
   </head>
   <body ng-app="meanApp">
     <!--[if lt IE 7]>

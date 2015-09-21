@@ -27,18 +27,6 @@ module.exports = function(app) {
        var type = '';
        var pollData = {};
 
-       // Determine user agent for social media crawlers
-       switch(true) {
-         case /facebookexternalhit/i.test(req.useragent.source):
-            type = 'facebook';
-            break;
-         case /Twitterbot/i.test(req.useragent.source):
-            type = 'twitter';
-            break;
-        default:
-            type = 'none';
-      }
-
       // If we recognize the user-agent, pull pollData
       if(type !== 'none') {
         var Poll = require('./api/poll/poll.model');
@@ -46,6 +34,8 @@ module.exports = function(app) {
           if(err) { return handleError(res, err); }
           if(!poll) { return res.status(404).send('Not Found'); }
           pollData = poll[0];
+          type = 'poll';  // If we found a poll
+          console.log("Found Poll");
         });
       } else {
         // If we don't do a find, we're fulfilled
@@ -54,6 +44,7 @@ module.exports = function(app) {
 
       // Once we have the poll data (or not), render the page
       promise.then(function(){
+        console.log("Stuff");
         var ipAddr = req.headers["x-forwarded-for"];
         if (ipAddr){
           var list = ipAddr.split(",");

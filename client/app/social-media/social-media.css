@@ -30,8 +30,17 @@
 }
 
 .share-twitter:hover {
-  background-color: #433e90
+  background-color: #433e90;
 }
+
+.share-google {
+  background-color: #DC4E41;
+}
+
+.share-google:hover {
+  background-color: #DC4E41;
+}
+
 
 .share-permalink {
   background-color: #888888;

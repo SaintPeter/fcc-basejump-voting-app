@@ -43,6 +43,7 @@ angular.module('meanApp')
           // otherwise just add item to the collection
           if (oldItem) {
             angular.extend(array[index], item);
+            array[index].updated = true;
             event = 'updated';
           } else {
             array.push(item);

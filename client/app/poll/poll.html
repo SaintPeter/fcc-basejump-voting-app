@@ -29,6 +29,7 @@
         </div>
 
         <div class="panel-footer pollFooter" ng-show="pollOwner(poll)">
+          <social-media url="http://poll-tastic.herokuapp.com/poll/{{ poll.friendly }}" text="{{ poll.question }}"  permalink="permalink"></social-media>
           <button class="btn btn-success" ng-click="doEditPoll(poll)">
             Edit &nbsp;<i class="fa fa-edit"></i>
           </button>
@@ -47,8 +48,11 @@
 
 <footer class="footer">
   <div class="container">
-      <p>Angular Fullstack v2.1.0 |
-        <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
-         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
+    <social-media url="http://poll-tastic.herokuapp.com" text="PollTastic!"></social-media>
+    <p>Polltastic! v1.0 |
+      <a href="https://twitter.com/rexitas">@rexitas</a> |
+      <a href="https://github.com/SaintPeter/fcc-basejump-voting-app/issues?state=open">Report Issues</a> |
+      <a href="/privacy">Privacy Policy</a>
+    </p>
   </div>
 </footer>

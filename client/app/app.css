@@ -62,6 +62,16 @@
   background: url("../assets/images/purple_bubbles_paree_flicr.jpg") no-repeat;
   background-size: cover;
   padding: 20px;
+  min-height: 200px;
+}
+
+.poll-container h1 {
+  color: white;
+  font-weight: bold;
+}
+
+.signup {
+    text-shadow: black 2px 2px 2px;
 }
 
 .voteList {
@@ -139,6 +149,56 @@ hr {
   z-index: 1;
 }
 
+.updated .totalVotes {
+  animation: pulse 3s infinite;
+}
+
+.updated .question {
+  animation: pulse-text 3s infinite;
+}
+
 .voted {
   background-color: #91268f;
+}
+
+@-webkit-keyframes pulse {
+  0%   { background-color: #a466aa; }
+  50%  { background-color:  #e4a2e9; }
+  100% { background-color: #a466aa; }
+}
+@-moz-keyframes pulse {
+  0%   { background-color: #a466aa; }
+  50%  { background-color:  #e4a2e9; }
+  100% { background-color: #a466aa; }
+}
+@-o-keyframes pulse {
+  0%   { background-color: #a466aa; }
+  50%  { background-color:  #e4a2e9; }
+  100% { background-color: #a466aa; }
+}
+@keyframes pulse {
+  0%   { background-color: #a466aa; }
+  50%  { background-color:  #e4a2e9; }
+  100% { background-color: #a466aa; }
+}
+
+@-webkit-keyframes pulse-text {
+  0%   { color: #e4a2e9; }
+  50%  { color:  white; }
+  100% { color: #e4a2e9; }
+}
+@-moz-keyframes pulse-text {
+  0%   { color: #e4a2e9; }
+  50%  { color:  white; }
+  100% { color: #e4a2e9; }
+}
+@-o-keyframes pulse-text {
+  0%   { color: #e4a2e9; }
+  50%  { color:  white; }
+  100% { color: #e4a2e9; }
+}
+@keyframes pulse-text {
+  0%   { color: #e4a2e9; }
+  50%  { color:  white; }
+  100% { color: #e4a2e9; }
 }
