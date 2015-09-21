@@ -56,7 +56,7 @@ angular.module('meanApp')
       };
 
       function voted(poll) {
-        if($routeParams.forceVote) {
+        if($routeParams.forceVote === 'forceVote') {
           return false;
         }
         if(poll) {

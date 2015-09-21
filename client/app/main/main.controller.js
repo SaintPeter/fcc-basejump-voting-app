@@ -121,7 +121,7 @@ angular.module('meanApp')
     }
 
     function voted(poll) {
-      if($routeParams.forceVote) {
+      if($routeParams.forceVote === 'forceVote') {
         return false;
       }
       // If the client IP is not in the list of voters they have not voted
