@@ -1,8 +1,9 @@
 'use strict';
 
 angular.module('meanApp')
-  .controller('MainCtrl', function ($scope, $http, socket, Auth,$timeout, $routeParams, ModalService) {
+  .controller('MainCtrl', function ($scope, $http, socket, Auth,$timeout, $routeParams, userAuthModals) {
     var expanded = {};
+    $scope.modal = userAuthModals;
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.myPolls = false;
 
@@ -54,30 +55,6 @@ angular.module('meanApp')
       });
     }
 
-    // Display login modal
-    $scope.doLogin = function() {
-      doShowModal({
-        templateUrl: 'app/account/login/login.html',
-        controller: 'LoginCtrl'
-      }, function(result) {
-        if(result === 'signup') {
-          $scope.doSignup();
-        }
-      });
-    };
-
-    // Display Signup Modal
-    $scope.doSignup = function() {
-      doShowModal({
-        templateUrl: 'app/account/signup/signup.html',
-        controller: 'SignupCtrl'
-      }, function(result) {
-        if(result === 'login') {
-          $scope.doLogin();
-        }
-      });
-    };
-
     // Display the Modal Dialog for the new Poll interface
     function addPoll() {
       doShowModal({
@@ -96,8 +73,6 @@ angular.module('meanApp')
         }
       });
     };
-
-
 
     function isExpanded(poll) {
       return expanded[poll.id];

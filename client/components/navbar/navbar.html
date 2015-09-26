@@ -14,8 +14,8 @@
     </div>
     <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav navbar-right">
-        <li ng-hide="isLoggedIn()"><a href="#" ng-click="doSignup()">Sign up</a></li>
-        <li ng-hide="isLoggedIn()"><a href="#" ng-click="doLogin()">Login</a></li>
+        <li ng-hide="isLoggedIn()"><a href="#" ng-click="modals.doSignup()">Sign up</a></li>
+        <li ng-hide="isLoggedIn()"><a href="#" ng-click="modals.doLogin()">Login</a></li>
         <li ng-show="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().name }}</p> </li>
         <li ng-show="isLoggedIn()"><a href="/settings" ng-click="">
           <span class="glyphicon glyphicon-cog" alt="Settings"></span></a>
