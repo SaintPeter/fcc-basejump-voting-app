@@ -85,6 +85,7 @@
 
 .questionLabel, .optionLabel {
   width: 5em;
+  padding-right: 5px;
 }
 
 .optionLabel {
