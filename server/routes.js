@@ -32,10 +32,9 @@ module.exports = function(app) {
         var Poll = require('./api/poll/poll.model');
         promise = Poll.find( { friendly: req.params.friendly }, function (err, poll) {
           if(err) { return handleError(res, err); }
-          if(!poll) { return res.status(404).send('Not Found'); }
+          if(!poll || poll.length < 1) { return res.status(404).send('Not Found'); }
           pollData = poll[0];
           type = 'poll';  // If we found a poll
-          console.log("Found Poll");
         });
       } else {
         // If we don't do a find, we're fulfilled
@@ -44,7 +43,6 @@ module.exports = function(app) {
 
       // Once we have the poll data (or not), render the page
       promise.then(function(){
-        console.log("Stuff");
         var ipAddr = req.headers["x-forwarded-for"];
         if (ipAddr){
           var list = ipAddr.split(",");
