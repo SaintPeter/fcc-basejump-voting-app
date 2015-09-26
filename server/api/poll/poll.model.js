@@ -1,5 +1,6 @@
 'use strict';
 
+var sanitizeHtml = require('sanitize-html');
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
@@ -20,6 +21,22 @@ var PollSchema = new Schema({
   votes: [],
   voters: [],
   active: Boolean,
+});
+
+// Automatically remove HTML from public facing fields on save
+PollSchema.pre('save', function(next) {
+  var sanitize = {
+    allowedTags: [],
+    allowedAttributes: []
+  };
+
+  this.question = sanitizeHtml(this.question, sanitize);
+  this.owner_name = sanitizeHtml(this.owner_name, sanitize);
+  this.options = this.options.map(function(option){
+      option.text = sanitizeHtml(option.text, sanitize);
+      return option;
+    });
+  next();
 });
 
 PollSchema.virtual('voteFor').set(function(voteFor, voterIp) {

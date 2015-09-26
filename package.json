@@ -28,6 +28,7 @@
     "passport-google-oauth": "^0.2.0",
     "passport-local": "~0.1.6",
     "passport-twitter": "latest",
+    "sanitize-html": "^1.10.0",
     "serve-favicon": "~2.0.1",
     "slugin": "0.0.12",
     "socket.io": "^1.0.6",
