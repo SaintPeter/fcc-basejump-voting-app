@@ -6,21 +6,21 @@
       <div  class="panel panel-default">
         <div class="panel-heading heading-custom-poll">
           <h3 class="panel-title">
-              <span class="totalVotes" ng-class="{voted: voted(poll)}"> {{ poll.totalVotes }} </span>
+              <span class="totalVotes" ng-class="{voted: pf.voted(poll)}"> {{ poll.totalVotes }} </span>
               <span class="question">{{ poll.question }}</span>
               <hr>
               <a class="author" href="#"> {{ poll.owner_name }} </a>
           </h3>
         </div>
 
-        <div class="panel-body poll-body slide" ng-show="voted(poll)">
+        <div class="panel-body poll-body slide" ng-show="pf.voted(poll)">
           <canvas id="doughnut" class="chart chart-doughnut" data="poll.chartData" labels="poll.chartLabels" legend="true"></canvas>
         </div>
 
-        <div class="panel-body poll-body slide" ng-show="!voted(poll)">
+        <div class="panel-body poll-body slide" ng-show="!pf.voted(poll)">
           <ul ng-repeat="option in poll.options" class="voteList">
             <li>
-              <button class="btn btn-info btn-xs" ng-click="doVote(poll, option)">
+              <button class="btn btn-info btn-xs" ng-click="pf.doVote(poll, option)">
                 Vote
               </button>
               {{ option.text }}
@@ -30,14 +30,14 @@
 
         <div class="panel-footer pollFooter">
           <social-media url="http://poll-tastic.herokuapp.com/poll/{{ poll.friendly }}" text="{{ poll.question }}"  permalink="permalink"></social-media>
-          <div class="button-container" ng-show="pollOwner(poll)">
-            <button class="btn btn-success" ng-click="doEditPoll(poll)">
+          <div class="button-container" ng-show="pf.pollOwner(poll)">
+            <button class="btn btn-success" ng-click="pf.doEditPoll(poll)">
               Edit &nbsp;<i class="fa fa-edit"></i>
             </button>
-            <button class="btn btn-warning" confirm="Are you sure you want to clear all votes?" ng-click="clearPoll(poll)">
+            <button class="btn btn-warning" confirm="Are you sure you want to clear all votes?" ng-click="pf.clearPoll(poll)">
               Clear &nbsp;<i class="fa fa-times"></i>
             </button>
-            <button class="btn btn-danger" confirm="Are you sure you want to delete this poll?" ng-click="deletePoll(poll)">
+            <button class="btn btn-danger" confirm="Are you sure you want to delete this poll?" ng-click="pf.deletePoll(poll)">
               Delete &nbsp;<i class="fa fa-times"></i>
             </button>
           </div>
