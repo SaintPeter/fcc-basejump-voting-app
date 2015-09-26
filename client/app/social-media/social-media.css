@@ -1,3 +1,9 @@
+.social-media-container {
+  float: left;
+  white-space: nowrap;
+  margin-bottom: 5px;
+}
+
 .share {
   border: none;
   border-radius: 50%;

@@ -99,6 +99,11 @@
  * Poll Styles
  */
 
+.button-container {
+  white-space: nowrap;
+  float:right;
+}
+
 .panel .heading-custom-poll {
   cursor: pointer;
 }
@@ -201,4 +206,22 @@ hr {
   0%   { color: #e4a2e9; }
   50%  { color:  white; }
   100% { color: #e4a2e9; }
+}
+
+/* Fix for chart labels wrapping */
+.bar-legend li,
+.chart-legend li,
+.doughnut-legend li,
+.line-legend li,
+.pie-legend li,
+.polararea-legend li,
+.radar-legend li {
+    display: inline-block;
+    white-space:normal;
+    position: relative;
+    margin-bottom: 4px;
+    border-radius: 5px;
+    padding: 2px 8px 2px 28px;
+    font-size: smaller;
+    cursor: default
 }

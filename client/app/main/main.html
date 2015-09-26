@@ -6,7 +6,7 @@
         <div class="panel-heading heading-custom-poll" ng-class="{ updated:(poll.updated && !isExpanded(poll)) }" ng-click="toggleExpand(poll)">
           <h3 class="panel-title">
               <span class="totalVotes" ng-class="{voted: voted(poll)}"> {{ poll.totalVotes }} </span>
-              <span class="question">{{ poll.question }}</span>
+              <div class="question">{{ poll.question }}</div>
               <hr>
               <a class="author" href="#"> {{ poll.owner_name }} </a>
           </h3>
@@ -29,7 +29,7 @@
 
         <div class="panel-footer pollFooter" ng-show="isExpanded(poll)">
           <social-media url="http://poll-tastic.herokuapp.com/poll/{{ poll.friendly }}" text="{{ poll.question }}"  permalink="permalink"></social-media>
-          <div ng-show="pollOwner(poll)">
+          <div class="button-container" ng-show="pollOwner(poll)">
             <button class="btn btn-success" ng-click="doEditPoll(poll)">
               Edit &nbsp;<i class="fa fa-edit"></i>
             </button>

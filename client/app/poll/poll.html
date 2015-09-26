@@ -28,17 +28,20 @@
           </ul>
         </div>
 
-        <div class="panel-footer pollFooter" ng-show="pollOwner(poll)">
+        <div class="panel-footer pollFooter">
           <social-media url="http://poll-tastic.herokuapp.com/poll/{{ poll.friendly }}" text="{{ poll.question }}"  permalink="permalink"></social-media>
-          <button class="btn btn-success" ng-click="doEditPoll(poll)">
-            Edit &nbsp;<i class="fa fa-edit"></i>
-          </button>
-          <button class="btn btn-warning" confirm="Are you sure you want to clear all votes?" ng-click="clearPoll(poll)">
-            Clear &nbsp;<i class="fa fa-times"></i>
-          </button>
-          <button class="btn btn-danger" confirm="Are you sure you want to delete this poll?" ng-click="deletePoll(poll)">
-            Delete &nbsp;<i class="fa fa-times"></i>
-          </button>
+          <div class="button-container" ng-show="pollOwner(poll)">
+            <button class="btn btn-success" ng-click="doEditPoll(poll)">
+              Edit &nbsp;<i class="fa fa-edit"></i>
+            </button>
+            <button class="btn btn-warning" confirm="Are you sure you want to clear all votes?" ng-click="clearPoll(poll)">
+              Clear &nbsp;<i class="fa fa-times"></i>
+            </button>
+            <button class="btn btn-danger" confirm="Are you sure you want to delete this poll?" ng-click="deletePoll(poll)">
+              Delete &nbsp;<i class="fa fa-times"></i>
+            </button>
+          </div>
+          <div class="clearfix"></div>
         </div>
       </div>
   </div>
