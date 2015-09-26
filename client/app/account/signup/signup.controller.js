@@ -17,6 +17,8 @@ angular.module('meanApp')
         .then( function() {
           // Account created, redirect to home
           $location.path('/');
+          // Close the modal
+          close('done');
         })
         .catch( function(err) {
           err = err.data;
