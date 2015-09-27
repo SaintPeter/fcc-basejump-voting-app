@@ -44,10 +44,16 @@ exports.update = function(req, res) {
     if (err) { return handleError(res, err); }
     if(!poll) { return res.status(404).send('Not Found'); }
     var updated = _.extend(poll, req.body);
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.status(200).json(poll);
-    });
+
+    // Must be owner or be an admin to update
+    if(poll.owner.toString() === req.user._id.toString() || req.user.role === 'admin') {
+      updated.save(function (err) {
+        if (err) { return handleError(res, err); }
+        return res.status(200).json(poll);
+      });
+    } else {
+      return res.status(403).send('You do not have permission to update this item');
+    }
   });
 };
 
@@ -82,15 +88,21 @@ exports.clearVotes = function(req, res) {
   Poll.findById(req.params.id, function (err, poll) {
     if (err) { return handleError(res, err); }
     if(!poll) { return res.status(404).send('Not Found'); }
-    var updated = _.extend(poll, req.body);
 
-    updated.voters = [];
-    updated.votes = Array.apply(null, Array(updated.votes.length)).map(Number.prototype.valueOf,0);
-    updated.totalVotes = 0;
-    updated.save(function (err) {
-      if (err) { return handleError(res, err); }
-      return res.status(200).json(poll);
-    });
+    // Only owners and admins may clear votes
+    if(poll.owner.toString() === req.user._id.toString() || req.user.role === 'admin') {
+      var updated = _.extend(poll, req.body);
+
+      updated.voters = [];
+      updated.votes = Array.apply(null, Array(updated.votes.length)).map(Number.prototype.valueOf,0);
+      updated.totalVotes = 0;
+      updated.save(function (err) {
+        if (err) { return handleError(res, err); }
+        return res.status(200).json(poll);
+      });
+    } else {
+      return res.status(403).send('You do not have permission to clear votes');
+    }
   });
 };
 
@@ -99,10 +111,16 @@ exports.destroy = function(req, res) {
   Poll.findById(req.params.id, function (err, poll) {
     if(err) { return handleError(res, err); }
     if(!poll) { return res.status(404).send('Not Found'); }
-    poll.remove(function(err) {
-      if(err) { return handleError(res, err); }
-      return res.status(204).send('No Content');
-    });
+
+    // Only owners and admins may delete
+    if(poll.owner.toString() === req.user._id.toString() || req.user.role === 'admin') {
+      poll.remove(function(err) {
+        if(err) { return handleError(res, err); }
+        return res.status(204).send('No Content');
+      });
+    } else {
+      return res.status(403).send('You do not have permission to delete this item');
+    }
   });
 };
 
