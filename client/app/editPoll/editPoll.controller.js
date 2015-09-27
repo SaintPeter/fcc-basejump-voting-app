@@ -1,56 +1,59 @@
 'use strict';
 
 angular.module('meanApp')
-  .controller('EditPollCtrl', function ($scope, thisPoll, $http) {
-    $scope.editPoll = thisPoll;
-    $scope.newOptions = [];
+  .controller('EditPollCtrl', function ($scope, thisPoll, $http, close) {
+    // Create a clone/copy of the poll we're editing
+    $scope.editPoll = JSON.parse(JSON.stringify(thisPoll));
+    $scope.message = '';
 
     $scope.addOption = function() {
-      $scope.newOptions.push({
-          id: $scope.editPoll.options.length + $scope.newOptions.length,
+      $scope.editPoll.options.push({
+          id: $scope.editPoll.options.length,
           text: ""
        });
+       // Add a new blank vote
+       $scope.editPoll.votes.push(0);
     };
 
     // Renumber options
-    function renumberNewOptions() {
-      // Start at the end of the current options
-      var num = $scope.editPoll.options.length;
+    function renumberOptions() {
+      var num = 0;
 
       // Renumber all the new options
-      $scope.newOptions = $scope.newOptions.map(function(option){
+      $scope.editPoll.options = $scope.editPoll.options.map(function(option){
         option.id = num;
         num++;
         return option;
       });
     }
 
-    $scope.deleteNewOption = function(del) {
-      $scope.newOptions = $scope.newOptions.filter(function(option){
+    $scope.deleteOption = function(del) {
+      // Remove the option from the poll
+      $scope.editPoll.options = $scope.editPoll.options.filter(function(option){
         return option.id !== del;
       });
+      // Delete corasponding votes
+      $scope.editPoll.votes.splice(del,1);
       renumberOptions();
     };
 
     $scope.savePoll = function() {
-      // Remove any blank answers:
-      $scope.newOptions = $scope.newOptions.filter(function(option) {
-        return option.text !== "";
+      // Remove any blank answers
+      $scope.editPoll.options.forEach(function(option) {
+        if(option.text.trim().length < 1) {
+          $scope.deleteOption(option.id);
+        }
       });
 
-      // Clear out blank options
-      renumberNewOptions();
-
-      // Append newOptions to exiting poll
-      $scope.editPoll.options = $scope.editPoll.options.concat($scope.newOptions);
-
-      // Create an array as long as the new options
-      var newBlanks = Array.apply(null, Array($scope.newOptions.length)).map(Number.prototype.valueOf,0);
-
-      // Append it to the current votes:
-      $scope.editPoll.votes = $scope.editPoll.votes.concat(newBlanks);
+      if($scope.editPoll.options.length < 2) {
+        $scope.message = "You must have at least two options.";
+        return;
+      } else {
+        $scope.message = '';
+      }
 
       $http.put('/api/polls/' + $scope.editPoll._id, $scope.editPoll);
+      close('done');
     };
 
   });
