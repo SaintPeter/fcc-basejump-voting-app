@@ -53,11 +53,6 @@ PollSchema.virtual('chartLabels').get(function() {
   var poll = this,
       labels = [];
 
-  // Sort the poll options for display
-  // poll.options = poll.options.sort(function(a,b) {
-  //   return poll.votes[b.id] - poll.votes[a.id];
-  // });
-
   poll.options.forEach(function(option){
     labels.push(option.text);
   });
@@ -68,11 +63,6 @@ PollSchema.virtual('chartLabels').get(function() {
 PollSchema.virtual('chartData').get(function() {
   var poll = this,
       data = [];
-
-  // Sort the poll options for display
-  // poll.options = poll.options.sort(function(a,b) {
-  //   return poll.votes[b.id] - poll.votes[a.id];
-  // });
 
   poll.options.forEach(function(option){
     var y = poll.votes[option.id] / poll.totalVotes * 100;
